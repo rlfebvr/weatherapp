@@ -103,13 +103,12 @@ function getDates(list){
     }
     return stock;
 }
-
+let usedChart;
 function chartDisplay(minMax,dates){
 
 const ctx = document.getElementById('myChart');
 
- console.log("minMax= " + minMax[0] + " /// " + minMax[1])
-  new Chart(ctx, {
+  usedChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: dates,
@@ -131,7 +130,7 @@ const ctx = document.getElementById('myChart');
     options: {
       scales: {
         y: {
-          beginAtZero: true
+         // beginAtZero: true
         }
       }
     }
@@ -158,17 +157,11 @@ const submitButton = document.querySelector('button');
 const cityInput = document.getElementById('myCity');
 let inputValue;
 cityInput.addEventListener("input",async function () {
-    // Get the input element and button
-  //  const cityInput = document.getElementById('myCity');
-    console.log(cityInput.value)
     const cityDatalist = document.getElementById('cities');
     inputValue = cityInput.value;
-        console.log("test2")
         cityDatalist.innerHTML = '';
         if (inputValue.length >= 3) {
-            console.log("test3")
             const filteredCities = cityChoices(await apiFetch(cityChoicesUrl(inputValue, 5)));
-            console.log(filteredCities)
             filteredCities.forEach(city => {
                 const option = document.createElement('option');
                 option.value = city;
@@ -184,9 +177,10 @@ submitButton.addEventListener('click',async function() {
     let city = await apiFetch(cityUrl);
     let weatherU = weatherUrl(city[0])
     let weather = await apiFetch(weatherU)
-    console.log(weather.list.length)
     let minMax = minMaxTemp(weather.list)
     let dates = getDates(sortedForecast(weather.list, 5));
+    if(usedChart)
+        usedChart.destroy();
     chartDisplay(minMax, dates)
 });
 
