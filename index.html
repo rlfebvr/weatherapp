@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js    " defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+</head>
+    <body>
+        <header>
+            <h1>Weather Application</h1>
+        </header>
+        <main>
+            <input list="cities" id="myCity" name="myCity" placeholder="Entrez une ville...">
+            <button>Submit</button>
+            <datalist id="cities"></datalist>
+            <p id="weather"></p>
+            <div class="container_canvas">
+                <canvas id="myChart"></canvas>
+            </div>
+            <img id="cityPhoto" src="default.jpg" alt="" style="display: none; max-width: 100%; margin-top: 20px;">
+        </main>
+    </body>
+</html>
